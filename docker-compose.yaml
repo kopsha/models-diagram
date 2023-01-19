@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  model-viewer:
+    build: ./
+    volumes:
+      - ./src:/app/src
+      - ./graph:/app/graph
+    environment:
+      - SECRET_KEY=$SECRET_KEY

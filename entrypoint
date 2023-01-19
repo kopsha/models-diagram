@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -e
+
+main()
+{
+    case $1 in
+        shell)
+            bash
+            ;;
+        develop)
+            printf "\t ..: Starting the developer loop\n"
+            find ./ -name "*.py" | entr -r ./manage.py graph_models -o /app/graph/diagram.png
+            ;;
+        *)
+            printf "\t ..: Invoking '$*'\n"
+            exec "$@"
+            ;;
+    esac
+}
+
+cd /app/src
+main "$@"
